@@ -1,6 +1,77 @@
 -- ============================================
+-- DATASET SETUP
+-- ============================================
+
+-- Picker Activity
+CREATE TABLE picker_activity (
+    activity_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    picker_id INTEGER,
+    shift VARCHAR(20),
+    order_id INTEGER,
+    sku VARCHAR(20),
+    quantity_picked INTEGER,
+    pick_date DATE
+);
+
+INSERT INTO picker_activity (picker_id, shift, order_id, sku, quantity_picked, pick_date) VALUES
+(101, 'Morning', 1001, 'Widget', 5, '2026-04-18'),
+(101, 'Morning', 1002, 'Cable', 10, '2026-04-18'),
+(102, 'Morning', 1003, 'Box', 20, '2026-04-18'),
+(103, 'Afternoon', 1004, 'Tape', 8, '2026-04-18'),
+(103, 'Afternoon', 1005, 'Widget', 12, '2026-04-18'),
+(104, 'Afternoon', 1006, 'Cable', 15, '2026-04-18'),
+(104, 'Afternoon', 1007, 'Box', 25, '2026-04-18');
+
+-- Dock Activity
+CREATE TABLE dock_activity (
+    door_id INTEGER,
+    activity_date DATE,
+    pallets_processed INTEGER
+);
+
+INSERT INTO dock_activity VALUES
+(1, '2026-04-01', 45),
+(1, '2026-04-02', 52),
+(1, '2026-04-03', 38),
+(1, '2026-04-04', 60),
+(2, '2026-04-01', 30),
+(2, '2026-04-02', 28),
+(2, '2026-04-03', 35),
+(2, '2026-04-04', 32),
+(3, '2026-04-01', 55),
+(3, '2026-04-02', 60),
+(3, '2026-04-03', 48),
+(3, '2026-04-04', 50);
+
+-- Shipments
+CREATE TABLE shipments (
+    shipment_id INTEGER PRIMARY KEY,
+    carrier VARCHAR(20),
+    promised_date DATE,
+    actual_date DATE,
+    pallets INTEGER
+);
+
+INSERT INTO shipments VALUES
+(1, 'FedEx', '2026-04-01', '2026-04-01', 12),
+(2, 'FedEx', '2026-04-03', '2026-04-05', 8),
+(3, 'FedEx', '2026-04-05', '2026-04-04', 15),
+(4, 'FedEx', '2026-04-07', '2026-04-10', 10),
+(5, 'UPS', '2026-04-01', '2026-04-01', 20),
+(6, 'UPS', '2026-04-03', '2026-04-03', 14),
+(7, 'UPS', '2026-04-05', '2026-04-04', 18),
+(8, 'UPS', '2026-04-07', '2026-04-07', 22),
+(9, 'DHL', '2026-04-02', '2026-04-03', 16),
+(10, 'DHL', '2026-04-04', '2026-04-04', 10),
+(11, 'DHL', '2026-04-06', '2026-04-09', 8),
+(12, 'DHL', '2026-04-08', '2026-04-08', 12);
+
+-- ============================================
+-- QUERIES BELOW
+-- ============================================-- ============================================
 -- WAREHOUSE PERFORMANCE REPORT
 -- ============================================
+
 
 -- ============================================
 -- Query 1: Picker Ranking by Shift
